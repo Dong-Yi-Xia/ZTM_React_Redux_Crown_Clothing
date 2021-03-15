@@ -8,11 +8,16 @@ import App from './App';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 // import reportWebVitals from './reportWebVitals';
 
+import store from './redux/store'
+
+
 ReactDOM.render( 
-    <Provider>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
+
+
