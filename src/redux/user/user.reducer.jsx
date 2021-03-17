@@ -12,7 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             // return a new object, to re-render component
             return {
                 ...state,
-                currentUser: action. payload
+                currentUser: action.payload
             }
         
         //if none of the action type matches, just return the state

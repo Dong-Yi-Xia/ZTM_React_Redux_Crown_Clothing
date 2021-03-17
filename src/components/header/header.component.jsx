@@ -7,7 +7,11 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 
 import { auth } from '../../firebase/firebase.utils'
 
+//connect is a higher order component, allow access to things related to redux,
+//wrap it around the component which gives us a super component  
+import { connect } from 'react-redux'
 
+//the {currentUser} is coming from the mapStateToProps
 const Header = ( {currentUser} ) => (
     <div className='header'>
         <Link className='logo-container' to='/'> 
@@ -26,6 +30,14 @@ const Header = ( {currentUser} ) => (
     </div>
 )
 
-export default Header
+// mapStateToProps is the standard naming, but it can be anything
+// state is the rootReducer, which has a user property. which user has a currentUser property
+const mapStateToProps = (state) => ({
+    currentUser: state.user.currentUser
+})
+
+//using connect and mapStateToProps if we need properties from our Reducers 
+export default connect(mapStateToProps)(Header)
+
 
 //Use the firebase auth.signOut method, to signout 
