@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
@@ -59,13 +59,27 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={SignInAndSignUpPage} />
+          <Route exact path='/signin' render={() => 
+            this.props.currentUser ? 
+            (<Redirect to='/' />) :
+            (<SignInAndSignUpPage/>)
+          }
+          />
         </Switch>
 
       </div>
     )
   }
 }
+
+//Using the redirect property, if use exist redirect else load the component of SignInAndSignUpPage
+
+
+// destructed the state from the store
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
 
 
 //mapDispatchToProps is the standard naming, can be anything 
@@ -76,4 +90,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 //we don't need to get mapStateToProps, since we are not retrieving any information, pass in null
 //we need to send infomation to the Reducer, we use mapDispatchToProps
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

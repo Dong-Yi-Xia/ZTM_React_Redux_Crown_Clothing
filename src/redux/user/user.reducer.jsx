@@ -1,3 +1,5 @@
+import { UserActionTypes } from './user.types'
+
 
 const INITIAL_STATE = {
     currentUser: null
@@ -8,7 +10,9 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action) => {
     //create a switch statement, action.type will be a string value
     switch(action.type){
-        case 'SET_CURRENT_USER' :
+        // case 'SET_CURRENT_USER' :
+        // Rewrite case action types from import 
+        case UserActionTypes.SET_CURRENT_USER :
             // return a new object, to re-render component
             return {
                 ...state,
