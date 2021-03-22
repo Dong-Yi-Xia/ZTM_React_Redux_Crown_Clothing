@@ -7,6 +7,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 
 import { auth } from '../../firebase/firebase.utils'
 import CartIcon from '../cart-icon/cart-icon.component'
+import CartDropDown from '../cart-dropdown/cart-dropdown.component'
 
 //connect is a higher order component, allow access to things related to redux,
 //wrap it around the component which gives us a super component  
@@ -18,6 +19,7 @@ const Header = ( {currentUser} ) => (
         <Link className='logo-container' to='/'> 
             <Logo className='logo' />
         </Link>
+
         <div className='options'> 
             <Link className='option' to='/shop'> SHOP </Link>
             <Link className='option' to='/contact'> CONTACT </Link>
@@ -29,6 +31,9 @@ const Header = ( {currentUser} ) => (
             }
             <CartIcon />
         </div>
+        
+        <CartDropDown />    
+
     </div>
 )
 
