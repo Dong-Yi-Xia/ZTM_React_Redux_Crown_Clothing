@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg' 
 
 import { auth } from '../../firebase/firebase.utils'
+import CartIcon from '../cart-icon/cart-icon.component'
 
 //connect is a higher order component, allow access to things related to redux,
 //wrap it around the component which gives us a super component  
@@ -26,6 +27,7 @@ const Header = ( {currentUser} ) => (
                 :
                 <Link className='option' to='/signin'> SIGN IN</Link>
             }
+            <CartIcon />
         </div>
     </div>
 )
