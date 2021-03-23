@@ -13,8 +13,8 @@ import CartDropDown from '../cart-dropdown/cart-dropdown.component'
 //wrap it around the component which gives us a super component  
 import { connect } from 'react-redux'
 
-//the {currentUser} is coming from the mapStateToProps
-const Header = ( {currentUser} ) => (
+//the {currentUser, hidden} is coming from the mapStateToProps
+const Header = ( {currentUser, hidden} ) => (
     <div className='header'>
         <Link className='logo-container' to='/'> 
             <Logo className='logo' />
@@ -29,19 +29,28 @@ const Header = ( {currentUser} ) => (
                 :
                 <Link className='option' to='/signin'> SIGN IN</Link>
             }
+            
             <CartIcon />
         </div>
-        
-        <CartDropDown />    
+        {hidden ? null : <CartDropDown />  }
+     
 
     </div>
 )
 
 // mapStateToProps is the standard naming, but it can be anything
 // state is the rootReducer, which has a user property. which user has a currentUser property
-const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+// const mapStateToProps = (state) => ({
+//     currentUser: state.user.currentUser
+// })
+
+
+//Destructing nested values, need to use :  
+const mapStateToProps = ({user: {currentUser}, cart: {hidden} }) => ({
+    currentUser,
+    hidden
 })
+
 
 //using connect and mapStateToProps if we need properties from our Reducers 
 export default connect(mapStateToProps)(Header)
