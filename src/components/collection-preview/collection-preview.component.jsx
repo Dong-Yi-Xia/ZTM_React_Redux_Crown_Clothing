@@ -9,6 +9,7 @@ const CollectionPreview = ( {title, items} ) => (
         <div className='preview'>
             {
                 items
+                //return 4 items in the array
                 .filter((item,idx) => idx < 4)
                 //destructed the item into id and ...otherItemProps
                 // .map(({id, ...otherItemProps}) => (
