@@ -8,11 +8,13 @@ import { ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg'
 
 import './cart-icon.styles.scss'
 
-const CartIcon = ({ toggleCartHidden }) => {
+
+//props coming from mapDispatchToProps and mapStateToProps
+const CartIcon = ({ toggleCartHidden, itemCount }) => {
     return(
         <div className='cart-icon' onClick={ toggleCartHidden }>
             <ShoppingIcon className='shopping-icon' />
-            <span className='item-count'> 0 </span>
+            <span className='item-count'> {itemCount} </span>
         </div>
     )
 }
@@ -27,4 +29,15 @@ const mapDispatchToProps = dispatch => ({
 //     toggleCartHidden
 // }
 
-export default connect(null,mapDispatchToProps)(CartIcon)
+
+// [ {}, {}, {}] array of item objects
+// this is a selector, pull in the state only using only a select portion  
+// always get rerendered, passing in new props 
+const mapStateToProps = ( {cart: {cartItems} }) => {
+    // console.log('I am being called')
+    return({
+        itemCount: cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)
+    })
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CartIcon)
