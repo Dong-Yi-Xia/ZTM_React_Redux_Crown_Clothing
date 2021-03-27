@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { toggleCartHidden } from '../../redux/cart/cart.actions'
+import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
 
 // Special syntax in React for importing SVG
 import { ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg' 
@@ -33,10 +34,19 @@ const mapDispatchToProps = dispatch => ({
 // [ {}, {}, {}] array of item objects
 // this is a selector, pull in the state only using only a select portion  
 // always get rerendered, passing in new props 
-const mapStateToProps = ( {cart: {cartItems} }) => {
-    // console.log('I am being called')
+// const mapStateToProps = ( {cart: {cartItems} }) => {
+//     // console.log('I am being called')
+//     return({
+//         itemCount: cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)
+//     })
+// }
+
+
+//using the reselector, from the redux selector file 
+//prevent rerender if the information is the same 
+const mapStateToProps = ( state ) => {
     return({
-        itemCount: cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0)
+        itemCount: selectCartItemsCount(state)
     })
 }
 
